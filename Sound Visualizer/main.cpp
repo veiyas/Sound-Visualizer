@@ -22,7 +22,7 @@ int main()
 		glfwTerminate();
 
 	//Background color
-	glClearColor(1, 0.5, 1, 1);
+	glClearColor(0.2, 0.5, 1, 1);
 	
 	while (!glfwWindowShouldClose(window)) {
 
