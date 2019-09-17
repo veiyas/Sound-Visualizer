@@ -1,6 +1,2 @@
 ﻿  main.cpp
-C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(35,77): warning C4100:  'mods': unreferenced formal parameter
-C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(35,51): warning C4100:  'scancode': unreferenced formal parameter
-C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(35,30): warning C4100:  'window': unreferenced formal parameter
-C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(53,26): warning C4100:  'error': unreferenced formal parameter
   Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound-Visualizer\x64\Debug\Sound Visualizer.exe
