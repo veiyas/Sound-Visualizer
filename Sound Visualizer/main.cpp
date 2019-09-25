@@ -4,6 +4,7 @@
 
 #include <GL/glew.h>  
 #include <GLFW/glfw3.h>
+#include <aubio/aubio.h>
 
 void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -14,17 +15,17 @@ bool load_shaders(GLuint& program);
 
 int main()
 {
-	//Initialize all openGL/glfw stuff with given window size
-	auto window = initialize_all_libraries(1920/2, 1080/2);
 
-	//Shader initialization, loading and validation
+	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
+
+	//Shader initialization
+
 	GLuint core_program;
 	if (!load_shaders(core_program))
 	{
 		std::cout << "Core program could not be loaded\n";
 		glfwTerminate();
-	}
-		
+	}		
 
 	//Background color
 	glClearColor(0.2, 0.5, 1, 0.5);
@@ -51,7 +52,7 @@ void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods
 {
 	//Hack away warnings B)
 	window; scancode; mods;
-	if (key == 'Q' && action == GLFW_PRESS)
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		glfwTerminate();
 		exit(0);
