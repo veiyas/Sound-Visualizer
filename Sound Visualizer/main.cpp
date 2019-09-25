@@ -15,7 +15,7 @@ bool load_shaders(GLuint& program);
 
 int main()
 {
-
+	
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
 
 	//Shader initialization
