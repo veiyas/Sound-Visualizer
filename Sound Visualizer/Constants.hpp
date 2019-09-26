@@ -4,6 +4,6 @@
 
 const GLfloat BAR_LENGTH = 0.1f; //Depth of bar
 const GLfloat BAR_WIDTH = 0.1f;  //Frequency spectrum bar width
-const GLfloat NUM_BARS = 150.f;  //Number of bars in each row
+const GLfloat NUM_BARS = 100.f;  //Number of bars in each row
 
 const GLfloat scale = 7;

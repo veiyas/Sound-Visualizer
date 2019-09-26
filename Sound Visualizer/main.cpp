@@ -51,8 +51,8 @@ int main()
 	//Model
 	glm::mat4 Model_Matrix(1.f);
 	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f,-20.f));
-	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f));
-	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(30.f), glm::vec3(1.f, 0.f, 0.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(35.f), glm::vec3(0.f, 1.f, 0.f));
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));
 	Model_Matrix = glm::scale(Model_Matrix, glm::vec3(1.f));
 
@@ -74,16 +74,21 @@ int main()
 	glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 	glUniform1f(location_scale, scale);
 
+	glfwSetTime(0);
+
 	/**********		MAIN LOOP	  **********/	
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		
+
+		test.render();
+
+		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -0.1 * glfwGetTime()));
 		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));
 		glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 		glUniformMatrix4fv(location_P, 1, GL_FALSE, glm::value_ptr(Projection_Matrix));
-
-		test.render();
 
 		glfwSwapBuffers(window);
 

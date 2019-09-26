@@ -3,7 +3,6 @@
 uniform float time;
 
 in vec3 vs_position;
-in vec3 vs_color;
 in float height_scale;
 
 out vec4 color;

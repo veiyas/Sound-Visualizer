@@ -1,6 +1,7 @@
 #include "Bar.hpp"
 
 Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
+	: nverts{8}, ntris{12}
 {
 	// The data array contains 8 floats per vertex:
 // coordinate xyz, normal xyz, texcoords st
@@ -28,9 +29,6 @@ Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
 		4,5,7,
 		4,7,6
 	};
-
-	nverts = 8;
-	ntris = 12;
 
 	vertexarray = new GLfloat[8 * nverts];
 	indexarray = new GLuint[3 * ntris];

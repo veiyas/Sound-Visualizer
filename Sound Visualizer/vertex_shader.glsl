@@ -9,13 +9,11 @@ uniform mat4 V;
 uniform float scale;
 
 out vec3 vs_position;
-out vec3 vs_color;
 out float height_scale;
 
 void main()
 {
 	height_scale = scale;
-	vs_position = vec4(M * vec4(Position, 1.f)).xyz;
-	vs_color = Color;
+	vs_position = Position;
     gl_Position = (P * V * M) * vec4(Position, 1.f);
 }
