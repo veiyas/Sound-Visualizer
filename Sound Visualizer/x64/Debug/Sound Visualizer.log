@@ -1,4 +1,2 @@
 ﻿  main.cpp
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\main.cpp(34,31): warning C4305:  'argument': truncation from 'double' to 'GLclampf'
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\main.cpp(30,18): warning C4101:  'ptr': unreferenced local variable
   Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound Visualizer\x64\Debug\Sound Visualizer.exe

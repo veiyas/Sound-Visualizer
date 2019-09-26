@@ -4,36 +4,63 @@
 
 #include <GL/glew.h>  
 #include <GLFW/glfw3.h>
-#include <aubio/aubio.h>
+
+#include "Row.hpp"
+#include "Freqbar.hpp"
 
 void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 void show_glfw_error(int error, const char* description);
+void create_perspective_matrix(float M[], const float& vfov, const float& aspect, const float& znear, const float& zfar);
+void create_translate_matrix(float M[], const float& x, const float& y, const float& z);
 GLFWwindow* initialize_all_libraries(int height, int width);
 
 bool load_shaders(GLuint& program);
 
 int main()
 {
-
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
 
 	//Shader initialization
-
 	GLuint core_program;
 	if (!load_shaders(core_program))
 	{
 		std::cout << "Core program could not be loaded\n";
 		glfwTerminate();
-	}		
+	}
+	// Shader uniforms
+	GLint location_time, location_MV, location_P;
+	location_MV = glGetUniformLocation(core_program, "MV");
+	location_P = glGetUniformLocation(core_program, "P");
+	location_time = glGetUniformLocation(core_program, "time");
+
+	//GLfloat time = 0.0f;
+	//GLfloat P[16];
+	//GLfloat MV[16];
+	//create_perspective_matrix(P, 1.0f, 1.0f, 0.0f, 100.0f);
+	//create_translate_matrix(MV, 0.0f, 0.0f, -1.0f);
 
 	//Background color
-	glClearColor(0.2, 0.5, 1, 0.5);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	/********************************************************
+						TEST AREA
+	********************************************************/
+	
+	//Row test{};
+
+	Freqbar test{ 0, 0, -3 };
+
+	/********************************************************
+	********************************************************/
+
 
 	/**********		MAIN LOOP	  **********/	
-	while (!glfwWindowShouldClose(window)) {
-
+	while (!glfwWindowShouldClose(window))
+	{
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		test.render();
 
 		glfwSwapBuffers(window);
 
@@ -223,5 +250,38 @@ bool load_shaders(GLuint& program)
 	glDeleteShader(fragmentShader);
 
 	return load_success;
+}
+
+void create_perspective_matrix(float M[], const float& vfov, const float& aspect, const float& znear, const float& zfar)
+{
+	float f = (cos(vfov / 2)) / (sin(vfov / 2));
+	float z1 = -1 * ((zfar + znear) / (zfar - znear));
+	float z2 = -1 * ((2 * znear * zfar) / (zfar - znear));
+
+	float MTemp[16] = {
+		(f / aspect) , 0.0f     , 0.0f    , 0.0f ,
+		0.0f       , f        , 0.0f    , 0.0f ,
+		0.0f       , 0.0f     , z1      ,-1.0f ,
+		0.0f       , 0.0f     , z2      , 1.0f
+	};
+
+	for (int i = 0; i < 16; i++) {
+		M[i] = MTemp[i];
+	}
+}
+
+void create_translate_matrix(float M[], const float& x, const float& y, const float&z)
+{
+
+	float MTemp[16] = {
+		1.0f		,0.0f		, 0.0f		, x ,
+		0.0f		, 1.0f      , 0.0f		, y ,
+		0.0f		, 0.0f		, 1.0f      , z ,
+		0.0f		, 0.0f		, 0.0f      , 1.0f
+	};
+
+	for (int i = 0; i < 16; i++) {
+		M[i] = MTemp[i];
+	}
 }
 
