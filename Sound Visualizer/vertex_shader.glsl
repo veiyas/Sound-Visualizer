@@ -1,18 +1,21 @@
 #version 330 core
 
 layout(location = 0) in vec3 Position;
-layout(location = 1) in vec3 Normal;
+layout(location = 1) in vec3 Color;
 
-uniform mat4 MV;
+uniform mat4 M;
 uniform mat4 P;
-uniform float time;
+uniform mat4 V;
+uniform float scale;
 
-out vec3 interpolatedNormal;
-out vec2 st;
-out vec3 Light;
+out vec3 vs_position;
+out vec3 vs_color;
+out float height_scale;
 
-void main(){
-    Light = mat3(MV) * vec3(1.0, 1.0, 1.0);
-    gl_Position = (P * MV) * vec4(Position, 1.0);
-    interpolatedNormal = mat3(MV) * Normal;
+void main()
+{
+	height_scale = scale;
+	vs_position = vec4(M * vec4(Position, 1.f)).xyz;
+	vs_color = Color;
+    gl_Position = (P * V * M) * vec4(Position, 1.f);
 }

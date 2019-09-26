@@ -1,15 +1,10 @@
 #pragma once
-#include <iostream>
-#include <string>
+#include "Bar.hpp"
+#include "Constants.hpp"
+
 #include <vector>
 #include <algorithm>
-
-#include <GL/glew.h>  
-#include <GLFW/glfw3.h>
-#include <aubio/aubio.h>
-
-#include "Freqbar.hpp"
-#include "Constants.hpp"
+#include <random>
 
 class Row
 {
@@ -22,5 +17,5 @@ public:
 	void render();
 
 private:
-	std::vector<Freqbar> bars;
+	std::vector<Bar> bars;
 };

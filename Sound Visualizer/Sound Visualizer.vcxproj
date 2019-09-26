@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Freqbar.cpp" />
+    <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Row.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -137,9 +137,11 @@
     <None Include="vertex_shader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bar.hpp" />
     <ClInclude Include="Constants.hpp" />
-    <ClInclude Include="Freqbar.hpp" />
+    <ClInclude Include="libs.hpp" />
     <ClInclude Include="Row.hpp" />
+    <ClInclude Include="Vertex.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,9 @@
 #pragma once
-const unsigned int BAR_LENGTH = 1; //Depth of bar
-const unsigned int BAR_WIDTH = 1;  //Frequency spectrum bar width
-const unsigned int NUM_BARS = 30;  //Number of bars in each row
+#include <GL/glew.h>  
+#include <GLFW/glfw3.h>
+
+const GLfloat BAR_LENGTH = 0.1f; //Depth of bar
+const GLfloat BAR_WIDTH = 0.1f;  //Frequency spectrum bar width
+const GLfloat NUM_BARS = 150.f;  //Number of bars in each row
+
+const GLfloat scale = 7;

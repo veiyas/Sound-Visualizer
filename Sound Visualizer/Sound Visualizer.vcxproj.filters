@@ -21,7 +21,7 @@
     <ClCompile Include="Row.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Freqbar.cpp">
+    <ClCompile Include="Bar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,10 +37,16 @@
     <ClInclude Include="Row.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Freqbar.hpp">
+    <ClInclude Include="Constants.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.hpp">
+    <ClInclude Include="libs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bar.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

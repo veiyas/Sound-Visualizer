@@ -1,18 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-
-#include <GL/glew.h>  
-#include <GLFW/glfw3.h>
-
-#include "Row.hpp"
-#include "Freqbar.hpp"
+#include "libs.hpp"
 
 void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 void show_glfw_error(int error, const char* description);
-void create_perspective_matrix(float M[], const float& vfov, const float& aspect, const float& znear, const float& zfar);
-void create_translate_matrix(float M[], const float& x, const float& y, const float& z);
 GLFWwindow* initialize_all_libraries(int height, int width);
 
 bool load_shaders(GLuint& program);
@@ -20,6 +10,9 @@ bool load_shaders(GLuint& program);
 int main()
 {
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
+	int frame_buffer_width = 0;
+	int frame_buffer_height = 0;
+	glfwGetFramebufferSize(window, &frame_buffer_width, &frame_buffer_height);
 
 	//Shader initialization
 	GLuint core_program;
@@ -29,36 +22,66 @@ int main()
 		glfwTerminate();
 	}
 	// Shader uniforms
-	GLint location_time, location_MV, location_P;
-	location_MV = glGetUniformLocation(core_program, "MV");
+	GLint location_V, location_M, location_P, location_scale;
+	location_M = glGetUniformLocation(core_program, "M");
 	location_P = glGetUniformLocation(core_program, "P");
-	location_time = glGetUniformLocation(core_program, "time");
+	location_V = glGetUniformLocation(core_program, "V");
+	location_scale = glGetUniformLocation(core_program, "scale");
 
-	//GLfloat time = 0.0f;
-	//GLfloat P[16];
-	//GLfloat MV[16];
-	//create_perspective_matrix(P, 1.0f, 1.0f, 0.0f, 100.0f);
-	//create_translate_matrix(MV, 0.0f, 0.0f, -1.0f);
+	//OpenGL options
+	glEnable(GL_DEPTH_TEST);	//Z buffer
+	glEnable(GL_CULL_FACE);		//Cull faces (on the back)
+		glCullFace(GL_BACK);
+		glFrontFace(GL_CCW);
 
-	//Background color
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+
+	glEnable(GL_TEXTURE_2D);
 
 	/********************************************************
 						TEST AREA
 	********************************************************/
-	
-	//Row test{};
+	Row test{};
 
-	Freqbar test{ 0, 0, -3 };
 
 	/********************************************************
 	********************************************************/
+	//Model
+	glm::mat4 Model_Matrix(1.f);
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f,-20.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));
+	Model_Matrix = glm::scale(Model_Matrix, glm::vec3(1.f));
 
+	//View
+	glm::vec3 world_up(0.f, 1.f, 0.f);
+	glm::vec3 cam_front(0.f, 0.f, -1.f);
+	glm::vec3 cam_position(0.f);
+	glm::mat4 View_Matrix(1.f);
+	View_Matrix = glm::lookAt(cam_position, cam_position + cam_front, world_up);
+
+	//Perspective
+	float fov = 90.f;
+	float near_plane = 0.1f;
+	float far_plane = 1000.f;
+	glm::mat4 Projection_Matrix(1.f);
+	Projection_Matrix = glm::perspective(glm::radians(fov), static_cast<float>(frame_buffer_width/frame_buffer_height), near_plane, far_plane);
+
+	glUseProgram(core_program);
+	glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
+	glUniform1f(location_scale, scale);
 
 	/**********		MAIN LOOP	  **********/	
 	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));
+		glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
+		glUniformMatrix4fv(location_P, 1, GL_FALSE, glm::value_ptr(Projection_Matrix));
 
 		test.render();
 
@@ -251,37 +274,3 @@ bool load_shaders(GLuint& program)
 
 	return load_success;
 }
-
-void create_perspective_matrix(float M[], const float& vfov, const float& aspect, const float& znear, const float& zfar)
-{
-	float f = (cos(vfov / 2)) / (sin(vfov / 2));
-	float z1 = -1 * ((zfar + znear) / (zfar - znear));
-	float z2 = -1 * ((2 * znear * zfar) / (zfar - znear));
-
-	float MTemp[16] = {
-		(f / aspect) , 0.0f     , 0.0f    , 0.0f ,
-		0.0f       , f        , 0.0f    , 0.0f ,
-		0.0f       , 0.0f     , z1      ,-1.0f ,
-		0.0f       , 0.0f     , z2      , 1.0f
-	};
-
-	for (int i = 0; i < 16; i++) {
-		M[i] = MTemp[i];
-	}
-}
-
-void create_translate_matrix(float M[], const float& x, const float& y, const float&z)
-{
-
-	float MTemp[16] = {
-		1.0f		,0.0f		, 0.0f		, x ,
-		0.0f		, 1.0f      , 0.0f		, y ,
-		0.0f		, 0.0f		, 1.0f      , z ,
-		0.0f		, 0.0f		, 0.0f      , 1.0f
-	};
-
-	for (int i = 0; i < 16; i++) {
-		M[i] = MTemp[i];
-	}
-}
-
