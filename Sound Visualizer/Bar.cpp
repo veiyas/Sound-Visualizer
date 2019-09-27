@@ -3,17 +3,18 @@
 Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
 	: nverts{8}, ntris{12}
 {
-	// The data array contains 8 floats per vertex:
-// coordinate xyz, normal xyz, texcoords st
+	bool reflection = true;
+
+	// coordinate xyz, normal xyz, texcoords st
 	const GLfloat vertex_array_data[] = {
-		-x_coord, -height, -z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 0
-		 x_coord, -height, -z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 1
-		-x_coord,  height, -z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Vertex 2
-		 x_coord,  height, -z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Vertex 3
-		-x_coord, -height,  z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 0
-		 x_coord, -height,  z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 1
-		-x_coord,  height,  z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Vertex 2
-		 x_coord,  height,  z_coord,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f  // Vertex 3
+		x_coord,			 -height * reflection,  z_coord,				 0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 0
+		x_coord + BAR_WIDTH, -height * reflection,  z_coord,				 0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 1
+		x_coord,			  height,				z_coord,				 0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Vertex 2
+		x_coord + BAR_WIDTH,  height,				z_coord,				 0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Vertex 3
+		x_coord,			 -height * reflection,  z_coord + BAR_LENGTH,	 0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 0
+		x_coord + BAR_WIDTH, -height * reflection,  z_coord + BAR_LENGTH,	 0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Vertex 1
+		x_coord,			  height,				z_coord + BAR_LENGTH,	 0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  // Vertex 2
+		x_coord + BAR_WIDTH,  height,				z_coord + BAR_LENGTH,	 0.0f, 0.0f, 1.0f,   0.0f, 0.0f  // Vertex 3
 	};
 	const GLuint index_array_data[] = {
 		0,3,1,
