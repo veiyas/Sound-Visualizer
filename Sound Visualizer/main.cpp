@@ -38,7 +38,6 @@ int main()
 
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
-
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
 	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, -3.5f, -15.f));
@@ -70,6 +69,20 @@ int main()
 	********************************************************/
 	Row test{};
 
+	//Read test
+	const char* inFileName;
+	SNDFILE* inFile;
+	SF_INFO inFileInfo;
+	int fs;
+
+	inFileName = "soundfiles/susann_vega.wav";
+
+	inFile = sf_open(inFileName, SFM_READ, &inFileInfo);
+	sf_close(inFile);
+
+	fs = inFileInfo.samplerate;
+
+	std::cout << fs << "\n";
 
 	/********************************************************
 	********************************************************/

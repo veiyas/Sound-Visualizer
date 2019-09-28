@@ -10,6 +10,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <libsndfile/sndfile.hh>
+#include <libsndfile/sndfile.h>
 
 #include "Constants.hpp"
 #include "Vertex.hpp"
