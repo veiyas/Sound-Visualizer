@@ -13,6 +13,8 @@
 #include <libsndfile/sndfile.hh>
 #include <libsndfile/sndfile.h>
 
+#include <FFTW/fftw3.h>
+
 #include "Constants.hpp"
 #include "Vertex.hpp"
 #include "Bar.hpp"
