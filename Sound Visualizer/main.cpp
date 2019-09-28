@@ -7,6 +7,57 @@ GLFWwindow* initialize_all_libraries(int height, int width);
 
 bool load_shaders(GLuint& program);
 
+//fft test
+#define REAL 0
+#define IMAG 1
+//length of the complex arrays
+#define N 8
+
+
+//compute 1-D fast Fourier transform
+void fft(fftw_complex* in, fftw_complex* out)
+{
+	fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+
+	fftw_execute(plan);
+
+	fftw_destroy_plan(plan);
+	fftw_cleanup();
+}
+
+void ifft(fftw_complex* in, fftw_complex* out)
+{
+	fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_BACKWARD, FFTW_ESTIMATE);
+
+	fftw_execute(plan);
+
+	fftw_destroy_plan(plan);
+	fftw_cleanup();
+
+	for (int i = 0; i < N; i++)
+	{
+		out[i][REAL] /= N;
+		out[i][IMAG] /= N;
+	}
+}
+
+void displayComplex(fftw_complex* y)
+{
+	for (int i = 0; i < N; i++)
+	{
+		if (y[i][IMAG] < 0)
+		{
+			std::cout << y[i][REAL] << " - " << abs(y[i][IMAG]) << "i" << std::endl;
+		}else
+		{
+			std::cout << y[i][REAL] << " x " << abs(y[i][IMAG]) << "i" << std::endl;
+		}
+	}
+
+
+}
+
+
 int main()
 {
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
