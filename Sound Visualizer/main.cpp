@@ -70,7 +70,7 @@ int main()
 	Row test{};
 
 	//Read test
-	const char* inFileName;
+	/*const char* inFileName;
 	SNDFILE* inFile;
 	SF_INFO inFileInfo;
 	int fs;
@@ -80,9 +80,17 @@ int main()
 	inFile = sf_open(inFileName, SFM_READ, &inFileInfo);
 	sf_close(inFile);
 
-	fs = inFileInfo.samplerate;
+	fs = inFileInfo.samplerate;*/
 
-	std::cout << fs << "\n";
+	WaveReader test1("soundfiles/susann_vega.wav");
+
+	int max = -1;
+
+	for (size_t i = 0; i < test1.frames.size(); i++)
+	{
+		if (test1.frames[i] > max)
+			max = test1.frames[i];
+	}
 
 	/********************************************************
 	********************************************************/

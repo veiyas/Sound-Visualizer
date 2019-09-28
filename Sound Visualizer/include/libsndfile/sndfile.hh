@@ -1,3 +1,4 @@
+#pragma once
 /*
 ** Copyright (C) 2005-2012 Erik de Castro Lopo <erikd@mega-nerd.com>
 **

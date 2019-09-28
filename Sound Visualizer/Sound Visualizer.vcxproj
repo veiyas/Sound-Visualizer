@@ -131,6 +131,8 @@
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Row.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WaveReader.cpp" />
+    <ClCompile Include="WaveReader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_shader.glsl" />

@@ -17,4 +17,5 @@
 #include "Vertex.hpp"
 #include "Bar.hpp"
 #include "Row.hpp"
+#include "WaveReader.hpp"
 
