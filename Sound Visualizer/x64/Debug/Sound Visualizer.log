@@ -1,10 +1,2 @@
-﻿  main.cpp
-C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
-C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
-C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:  '=': conversion from '_Ty' to 'int', possible loss of data
-C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:         with
-C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:         [
-C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:             _Ty=double
-C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:         ]
-x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
+﻿x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
   Sound Visualizer.vcxproj -> C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\x64\Debug\Sound Visualizer.exe
