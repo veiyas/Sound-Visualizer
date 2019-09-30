@@ -2,15 +2,13 @@
 
 in vec3 vs_position;
 in float height_scale;
+vec3 green = vec3(0.f, 1.f, 0.f);
+vec3 red = vec3(1.f, 0.f, 0.f);
 
 out vec4 color;
 
 void main()
 {
-	//Red/green vectors to blend with
-	vec3 green = vec3(0.f, 1.f, 0.f);
-	vec3 red = vec3(1.f, 0.f, 0.f);
-
 	//Calculate interpolation factor with regards to mirrored geometry
 	float u;
 

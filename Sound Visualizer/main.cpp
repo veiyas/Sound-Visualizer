@@ -1,9 +1,12 @@
 #include "libs.hpp"
 
+
+
 void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 void show_glfw_error(int error, const char* description);
 GLFWwindow* initialize_all_libraries(int height, int width);
+void fft(fftw_complex* in, fftw_complex* out);
 
 bool load_shaders(GLuint& program);
 
@@ -334,4 +337,17 @@ bool load_shaders(GLuint& program)
 	glDeleteShader(fragmentShader);
 
 	return load_success;
+}
+
+//compute 1-D fast Fourier transform
+void fft(fftw_complex* in, fftw_complex* out)
+{
+	const unsigned N = 8;
+
+	fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+
+	fftw_execute(plan);
+
+	fftw_destroy_plan(plan);
+	fftw_cleanup();
 }

@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <libsndfile/sndfile.hh>
 #include <libsndfile/sndfile.h>
+#include <FFTW/fftw3.h>
 
 #include <FFTW/fftw3.h>
 
