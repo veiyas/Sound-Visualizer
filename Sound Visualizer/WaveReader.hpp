@@ -2,9 +2,12 @@
 
 #include <libsndfile/sndfile.hh>
 #include <libsndfile/sndfile.h>
+#include <FFTW/fftw3.h>
 
 #include <vector>
 #include <iostream>
+
+const unsigned INTERVAL = 1000;
 
 class WaveReader
 {
@@ -12,6 +15,7 @@ public:
 	WaveReader(const char * _path);
 
 	std::vector<double> frames;
+	std::vector<double> freq_data;
 
 	unsigned fs = 0;
 };

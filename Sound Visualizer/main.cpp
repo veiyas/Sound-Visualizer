@@ -125,13 +125,11 @@ int main()
 
 	WaveReader test1("soundfiles/susann_vega.wav");
 
-	int max = -1;
+	fftw_complex* out =	fftw_alloc_complex(test1.frames.size());
 
-	for (size_t i = 0; i < test1.frames.size(); i++)
-	{
-		if (test1.frames[i] > max)
-			max = test1.frames[i];
-	}
+	fftw_plan test2 = fftw_plan_dft_r2c_1d(test1.frames.size(), test1.frames.data(), out, FFTW_ESTIMATE);
+
+	fftw_execute(test2);
 
 	/********************************************************
 	********************************************************/
@@ -337,17 +335,4 @@ bool load_shaders(GLuint& program)
 	glDeleteShader(fragmentShader);
 
 	return load_success;
-}
-
-//compute 1-D fast Fourier transform
-void fft(fftw_complex* in, fftw_complex* out)
-{
-	const unsigned N = 8;
-
-	fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
-
-	fftw_execute(plan);
-
-	fftw_destroy_plan(plan);
-	fftw_cleanup();
 }
