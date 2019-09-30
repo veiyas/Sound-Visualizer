@@ -1,2 +1,2 @@
-﻿  WaveReader.cpp
-  Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound-Visualizer\x64\Debug\Sound Visualizer.exe
+﻿x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
+  Sound Visualizer.vcxproj -> C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\x64\Debug\Sound Visualizer.exe
