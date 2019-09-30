@@ -7,9 +7,4 @@ C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(
 C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:             _Ty=double
 C:\Users\William\source\repos\veiyas\Sound-Visualizer\Sound Visualizer\main.cpp(143,24): warning C4244:         ]
 x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
-main.obj : error LNK2019: unresolved external symbol __imp_fftw_execute referenced in function "void __cdecl fft(double (*)[2],double (*)[2])" (?fft@@YAXPEAY01N0@Z)
-main.obj : error LNK2019: unresolved external symbol __imp_fftw_plan_dft_1d referenced in function "void __cdecl fft(double (*)[2],double (*)[2])" (?fft@@YAXPEAY01N0@Z)
-main.obj : error LNK2019: unresolved external symbol __imp_fftw_destroy_plan referenced in function "void __cdecl fft(double (*)[2],double (*)[2])" (?fft@@YAXPEAY01N0@Z)
-main.obj : error LNK2019: unresolved external symbol __imp_fftw_cleanup referenced in function "void __cdecl fft(double (*)[2],double (*)[2])" (?fft@@YAXPEAY01N0@Z)
-C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\Sound Visualizer\lib\libfftw3-3.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\x64\Debug\Sound Visualizer.exe : fatal error LNK1120: 4 unresolved externals
+  Sound Visualizer.vcxproj -> C:\Users\William\Source\Repos\veiyas\Sound-Visualizer\x64\Debug\Sound Visualizer.exe
