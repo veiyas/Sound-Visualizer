@@ -9,21 +9,36 @@ Spectrum::Spectrum(const char* _path)
 
 void Spectrum::create_row()
 {
-	rows.resize(freqs.size());
-	rows[which_row] = new Row(freqs[which_row], which_row);
-	++which_row;
-
-	if (which_row > 10)
+	if (which_row != freqs.size())
 	{
-		delete rows[which_row - 10];
-		rows[which_row - 10] = nullptr;
+		rows.resize(freqs.size());
+		rows[which_row] = new Row(freqs[which_row], which_row);
+		++which_row;
+
+		if (which_row > 30)
+		{
+			delete rows[which_row - 20];
+			//rows[which_row - 10] = nullptr;
+		}
 	}
+	else
+		std::cout << "No more frequency data\n";
 }
 
 void Spectrum::render()
 {
-	for (size_t i = 0; rows[i] != nullptr && i < rows.size(); i++)
+	if (which_row > 30)
 	{
-		rows[i]->render();
+		for (size_t i = which_row - 20; rows[i] != nullptr && i < rows.size() - 1; i++)
+		{
+			rows[i]->render();
+		}
+	}
+	else
+	{
+		for (size_t i = 0; rows[i] != nullptr && i < rows.size() - 1; i++)
+		{
+			rows[i]->render();
+		}
 	}
 }

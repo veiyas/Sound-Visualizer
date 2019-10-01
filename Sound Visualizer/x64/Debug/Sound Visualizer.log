@@ -1,4 +1,14 @@
-﻿  Row.cpp
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\Row.cpp(12,38): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
+﻿  Bar.cpp
+  Row.cpp
+  main.cpp
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\Row.cpp(12,37): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
+  Spectrum.cpp
+  WaveReader.cpp
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\WaveReader.cpp(14,24): warning C4244:  'argument': conversion from 'double' to 'const unsigned __int64', possible loss of data
+  WaveReader.hpp
+  Generating Code...
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\WaveReader.cpp(26,26): warning C4018:  '>=': signed/unsigned mismatch
 x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
   Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound Visualizer\x64\Debug\Sound Visualizer.exe

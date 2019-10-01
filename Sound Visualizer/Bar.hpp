@@ -12,6 +12,7 @@ class Bar
 {
 public:
 	Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord);
+	~Bar() = default;
 
 	void render();
 

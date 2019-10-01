@@ -86,6 +86,8 @@ Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+
+
 void Bar::render()
 {
 	glBindVertexArray(vao);

@@ -5,12 +5,11 @@ Row::Row(fftw_complex* data, int depth)
 	for (size_t i = 0; i < NUM_BARS; i++)
 	{
 		double mag = sqrt(pow(data[i][REAL], 2) + pow(data[i][IMAG], 2));
-		//std::cout << mag << "\n";
-		if(mag < 1e-4)
-			bars.push_back(Bar(BAR_WIDTH*i, 0, BAR_LENGTH*depth));
-		else
-			bars.push_back(Bar(BAR_WIDTH * i, mag, BAR_LENGTH * depth));
+		
+		if(mag < 1e-3)
+			mag = 0.0;
 
+		bars.push_back(Bar(BAR_WIDTH * i, mag, BAR_LENGTH * depth));
 	}
 }
 

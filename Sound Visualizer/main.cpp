@@ -56,9 +56,9 @@ int main()
 
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-10.f, -3.5f, -25.f));
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-20.f, -3.5f, -35.f));
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
-	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(30.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
 	Model_Matrix = glm::scale(Model_Matrix, glm::vec3(1.f));
 
@@ -75,34 +75,44 @@ int main()
 	float far_plane = 1000.f;
 	glm::mat4 Projection_Matrix(1.f);
 	Projection_Matrix = glm::perspective(glm::radians(fov), static_cast<float>(frame_buffer_width/frame_buffer_height), near_plane, far_plane);
-
+	//Projection_Matrix = glm::ortho(-24, 24, -19, 19);
 	glUseProgram(core_program);
 	glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 	glUniform1f(location_scale, scale);
-
 	
-
-
+	
+	double current_time = 0.0;
+	double last_time = 0.0;
+	double render_time = 0;
 	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	glfwSetTime(0);
 
 	/**********		MAIN LOOP	  **********/	
 	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window))
-	{
+	{		
+		current_time = glfwGetTime();	
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 
 		spec.create_row();
 		spec.render();
 
-		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -0.1 * glfwGetTime())); //Move the rows
-		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));
-		glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
-		glUniformMatrix4fv(location_P, 1, GL_FALSE, glm::value_ptr(Projection_Matrix));
+		
 
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
+		
+		last_time = glfwGetTime();
+		render_time = last_time - current_time;
+
+		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -1 * render_time * 27)); //Move the rows
+		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));
+		glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
+		glUniformMatrix4fv(location_P, 1, GL_FALSE, glm::value_ptr(Projection_Matrix));
+
+		std::cout << "FPS: " << 1 / render_time << "\n";
 	}
 
 	glfwDestroyWindow(window);

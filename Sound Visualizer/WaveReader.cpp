@@ -47,4 +47,6 @@ WaveReader::WaveReader(const char* _path)
 			fftw_destroy_plan(fft_plan);
 			fftw_cleanup();
 		}
+		std::cout << "Number of samples to display: " << frames.size() / BUFFER << "\n";
+
 }
