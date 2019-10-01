@@ -30,6 +30,9 @@
     <ClCompile Include="WaveReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spectrum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex_shader.glsl">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spectrum.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

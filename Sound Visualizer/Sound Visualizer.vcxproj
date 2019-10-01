@@ -134,6 +134,7 @@
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Row.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Spectrum.cpp" />
     <ClCompile Include="WaveReader.cpp" />
     <ClCompile Include="WaveReader.hpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="libs.hpp" />
     <ClInclude Include="Row.hpp" />
+    <ClInclude Include="Spectrum.hpp" />
     <ClInclude Include="Vertex.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

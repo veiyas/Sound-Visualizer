@@ -1,4 +1,4 @@
-﻿  main.cpp
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+﻿  Row.cpp
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\Row.cpp(12,38): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
+x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
   Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound Visualizer\x64\Debug\Sound Visualizer.exe

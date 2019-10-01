@@ -17,9 +17,11 @@
 
 #include <FFTW/fftw3.h>
 
+#include "Spectrum.hpp"
 #include "Constants.hpp"
 #include "Vertex.hpp"
 #include "Bar.hpp"
 #include "Row.hpp"
 #include "WaveReader.hpp"
+
 

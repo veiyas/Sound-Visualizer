@@ -1,7 +1,5 @@
 #include "libs.hpp"
 
-
-
 void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 void show_glfw_error(int error, const char* description);
@@ -10,20 +8,21 @@ void fft(fftw_complex* in, fftw_complex* out);
 
 bool load_shaders(GLuint& program);
 
-//fft test
-#define REAL 0
-#define IMAG 1
-//length of the complex arrays
-#define N 8
-
-
-
-
 int main()
 {
-	std::cout << "Reading and calculating frequency data....";
-	WaveReader data("soundfiles/susann_vega.wav");
-	std::cout << "done!\n";
+	//std::cout << "Reading and calculating frequency data....";
+	//WaveReader data("soundfiles/susann_vega.wav");
+	//std::cout << "done!\n";
+
+	/********************************************************
+					TEST AREA
+	********************************************************/
+
+	Spectrum spec{ "soundfiles/susann_vega.wav" };
+
+
+	/********************************************************
+	********************************************************/
 
 
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
@@ -57,8 +56,8 @@ int main()
 
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, -3.5f, -15.f));
-	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(15.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-10.f, -3.5f, -25.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(30.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
 	Model_Matrix = glm::scale(Model_Matrix, glm::vec3(1.f));
@@ -81,25 +80,20 @@ int main()
 	glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 	glUniform1f(location_scale, scale);
 
-	/********************************************************
-					TEST AREA
-	********************************************************/
-
-	Row test{};	
-
-	/********************************************************
-	********************************************************/
+	
 
 
 	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	glfwSetTime(0);
+
 	/**********		MAIN LOOP	  **********/	
 	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 
-		test.render();
+		spec.create_row();
+		spec.render();
 
 		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -0.1 * glfwGetTime())); //Move the rows
 		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));

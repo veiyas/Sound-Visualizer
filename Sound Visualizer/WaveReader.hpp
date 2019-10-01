@@ -9,7 +9,7 @@
 #include <iostream>
 #include <cmath>
 
-const unsigned BUFFER = 1024;
+const unsigned BUFFER = 4096;
 
 class WaveReader
 {
