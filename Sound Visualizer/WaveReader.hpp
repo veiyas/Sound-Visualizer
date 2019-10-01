@@ -7,8 +7,9 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include <cmath>
 
-const unsigned BUFFER = 1000;
+const unsigned BUFFER = 1024;
 
 class WaveReader
 {

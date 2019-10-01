@@ -23,12 +23,14 @@ WaveReader::WaveReader(const char* _path)
 
 			for (long long int j = i*BUFFER; j < (i + 1) * BUFFER; j++)
 			{
-				if ((i + 1) * BUFFER < frames.size())
+				if ((i + 1) * BUFFER >= frames.size())
 				{
 					end_of_frames = true;
 					break;
 				}
-				temp[j % BUFFER] = frames.at(j);
+				double multiplier = 0.5 * (1 - cos(2 * 3.141 * (j % BUFFER) / (BUFFER - 1)));
+
+				temp[j % BUFFER] = multiplier * frames[j];
 			}
 			if (end_of_frames)
 				break;
@@ -39,12 +41,10 @@ WaveReader::WaveReader(const char* _path)
 
 			fftw_execute(fft_plan);
 
-			freq_data.push_back(out);
+			freq_data[i] = out;
 
 			delete[] temp;
 			fftw_destroy_plan(fft_plan);
 			fftw_cleanup();
-
-			std::cout << i << "\n";
 		}
 }
