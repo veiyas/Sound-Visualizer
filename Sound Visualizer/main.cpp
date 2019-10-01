@@ -21,6 +21,11 @@ bool load_shaders(GLuint& program);
 
 int main()
 {
+	std::cout << "Reading and calculating frequency data....";
+	WaveReader data("soundfiles/susann_vega.wav");
+	std::cout << "done!\n";
+
+
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
 	int frame_buffer_width = 0;
 	int frame_buffer_height = 0;
@@ -80,16 +85,13 @@ int main()
 					TEST AREA
 	********************************************************/
 
-	//PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_FILENAME | SND_ASYNC);
-	
-
-	Row test{};
-
-	WaveReader test1("soundfiles/susann_vega.wav");
+	Row test{};	
 
 	/********************************************************
 	********************************************************/
 
+
+	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	glfwSetTime(0);
 	/**********		MAIN LOOP	  **********/	
 	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_ASYNC);
