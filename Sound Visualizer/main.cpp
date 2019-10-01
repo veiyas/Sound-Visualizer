@@ -4,23 +4,22 @@ void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 void show_glfw_error(int error, const char* description);
 GLFWwindow* initialize_all_libraries(int height, int width);
-void fft(fftw_complex* in, fftw_complex* out);
 
 bool load_shaders(GLuint& program);
 
+const double ROWS_PER_SEC = (double)BUFFER / (double)SAMPLERATE;
+const char *PATH = "soundfiles/susann_vega.wav";
+
 int main()
 {
-	//std::cout << "Reading and calculating frequency data....";
-	//WaveReader data("soundfiles/susann_vega.wav");
-	//std::cout << "done!\n";
-
 	/********************************************************
 					TEST AREA
 	********************************************************/
+	std::cout << "Reading and calculating frequency data....";
 
-	Spectrum spec{ "soundfiles/susann_vega.wav" };
+	Spectrum spec{ PATH };
 
-
+	std::cout << "done!\n";
 	/********************************************************
 	********************************************************/
 
@@ -56,8 +55,8 @@ int main()
 
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-20.f, -3.5f, -35.f));
-	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-30.f, -23.f, -55.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(30.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
 	Model_Matrix = glm::scale(Model_Matrix, glm::vec3(1.f));
@@ -83,36 +82,35 @@ int main()
 	
 	double current_time = 0.0;
 	double last_time = 0.0;
-	double render_time = 0;
-	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	double render_time = 1.0;
 	glfwSetTime(0);
 
 	/**********		MAIN LOOP	  **********/	
-	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_ASYNC);
+	PlaySound(TEXT(PATH), NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window))
-	{		
+	{
 		current_time = glfwGetTime();	
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 
 		spec.create_row();
-		spec.render();
-
-		
+		spec.render();		
 
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
-		
-		last_time = glfwGetTime();
-		render_time = last_time - current_time;
 
-		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -1 * render_time * 27)); //Move the rows
+		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -0.015 * (1 / render_time))); //Move the rows
 		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));
 		glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 		glUniformMatrix4fv(location_P, 1, GL_FALSE, glm::value_ptr(Projection_Matrix));
+		
+		//std::cout << "FPS: " << 1 / render_time << "\n";
 
-		std::cout << "FPS: " << 1 / render_time << "\n";
+		last_time = glfwGetTime();
+		render_time = last_time - current_time;
+
+		Sleep((ROWS_PER_SEC - render_time) * 1000);
 	}
 
 	glfwDestroyWindow(window);

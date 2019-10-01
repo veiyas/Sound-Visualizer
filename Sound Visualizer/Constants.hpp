@@ -8,3 +8,6 @@ const GLfloat BAR_HEIGHT = 15.f;  //Frequency spectrum bar width
 const unsigned NUM_BARS = 200;  //Number of bars in each row
 
 const GLfloat scale = 30.f;
+
+const unsigned BUFFER = 2048;
+const unsigned SAMPLERATE = 48000;

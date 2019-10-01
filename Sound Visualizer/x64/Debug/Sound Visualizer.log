@@ -1,14 +1,8 @@
-﻿  Bar.cpp
-  Row.cpp
-  main.cpp
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\Row.cpp(12,37): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
-  Spectrum.cpp
-  WaveReader.cpp
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\WaveReader.cpp(14,24): warning C4244:  'argument': conversion from 'double' to 'const unsigned __int64', possible loss of data
-  WaveReader.hpp
-  Generating Code...
-C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\WaveReader.cpp(26,26): warning C4018:  '>=': signed/unsigned mismatch
-x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
-  Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound Visualizer\x64\Debug\Sound Visualizer.exe
+﻿  main.cpp
+C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
+C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(595): message :  see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(172): message :  see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(574): message :  see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
+C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(113,38): warning C4244:  'argument': conversion from 'double' to 'DWORD', possible loss of data
+  Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound-Visualizer\x64\Debug\Sound Visualizer.exe

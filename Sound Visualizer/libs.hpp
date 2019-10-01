@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <chrono>
+#include <thread>
 #include <Windows.h>
 
 #include <GL/glew.h>  
