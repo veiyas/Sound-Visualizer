@@ -85,13 +85,7 @@ int main()
 
 	Row test{};
 
-	WaveReader test1("soundfiles/susann_vega.wav");
-
-	fftw_complex* out =	fftw_alloc_complex(test1.frames.size());
-
-	fftw_plan test2 = fftw_plan_dft_r2c_1d(test1.frames.size(), test1.frames.data(), out, FFTW_ESTIMATE);
-
-	fftw_execute(test2);
+	WaveReader test1("soundfiles/susann_vega.wav");	
 
 	/********************************************************
 	********************************************************/
