@@ -51,11 +51,9 @@ int main()
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-30.f, -23.f, -55.f));
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-45.f, -30.f, -55.f));
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(30.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
@@ -74,7 +72,6 @@ int main()
 	float far_plane = 1000.f;
 	glm::mat4 Projection_Matrix(1.f);
 	Projection_Matrix = glm::perspective(glm::radians(fov), static_cast<float>(frame_buffer_width/frame_buffer_height), near_plane, far_plane);
-	//Projection_Matrix = glm::ortho(-24, 24, -19, 19);
 	glUseProgram(core_program);
 	glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 	glUniform1f(location_scale, scale);
@@ -89,12 +86,14 @@ int main()
 	PlaySound(TEXT(PATH), NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window))
 	{
-		current_time = glfwGetTime();	
+		current_time = glfwGetTime();
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glClearColor(sin(current_time), sin(current_time), cos(current_time), 1.0f);
 
 		spec.create_row();
-		spec.render();		
+		spec.render();
 
 		glfwSwapBuffers(window);
 
@@ -110,6 +109,7 @@ int main()
 		last_time = glfwGetTime();
 		render_time = last_time - current_time;
 
+		//Pausa loopen i så lång tid det krävs till nästa row ska visas för att behålla synk (ms)
 		Sleep((ROWS_PER_SEC - render_time) * 1000);
 	}
 

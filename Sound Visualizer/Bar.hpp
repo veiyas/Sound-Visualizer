@@ -18,7 +18,7 @@ public:
 
 private:
 	//OpenGL magic
-	GLuint vao = 1; // Vertex array object, the main handle for geometry
+	GLuint vao = 0; // Vertex array object, the main handle for geometry
 	const int nverts; // Number of vertices in the vertex array
 	const int ntris;  // Number of triangles in the index array (may be zero)
 	GLuint vertexbuffer; // Buffer ID to bind to GL_ARRAY_BUFFER

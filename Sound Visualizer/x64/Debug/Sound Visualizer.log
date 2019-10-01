@@ -4,5 +4,8 @@ C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\include\glm\detail
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(595): message :  see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(172): message :  see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(574): message :  see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
+C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(93,57): warning C4244:  'argument': conversion from 'double' to 'GLclampf', possible loss of data
+C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(93,38): warning C4244:  'argument': conversion from 'double' to 'GLclampf', possible loss of data
+C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(93,19): warning C4244:  'argument': conversion from 'double' to 'GLclampf', possible loss of data
 C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\main.cpp(113,38): warning C4244:  'argument': conversion from 'double' to 'DWORD', possible loss of data
   Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound-Visualizer\x64\Debug\Sound Visualizer.exe

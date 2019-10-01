@@ -17,8 +17,9 @@ void Spectrum::create_row()
 
 		if (which_row > 30)
 		{
-			delete rows[which_row - 20];
-			//rows[which_row - 10] = nullptr;
+			auto *ptr = rows[which_row - 30];
+			delete rows[which_row - 30];
+			ptr = nullptr;
 		}
 	}
 	else
