@@ -91,7 +91,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Sound Visualizer\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libfftw3-3.lib;glew32.lib;glew32s.lib;glfw3.lib;libsndfile-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libfftw3-3.lib;glew32.lib;glew32s.lib;glfw3.lib;libsndfile-1.lib;opengl32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>

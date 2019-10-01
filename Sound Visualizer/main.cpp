@@ -17,48 +17,6 @@ bool load_shaders(GLuint& program);
 #define N 8
 
 
-//compute 1-D fast Fourier transform
-void fft(fftw_complex* in, fftw_complex* out)
-{
-	fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
-
-	fftw_execute(plan);
-
-	fftw_destroy_plan(plan);
-	fftw_cleanup();
-}
-
-void ifft(fftw_complex* in, fftw_complex* out)
-{
-	fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_BACKWARD, FFTW_ESTIMATE);
-
-	fftw_execute(plan);
-
-	fftw_destroy_plan(plan);
-	fftw_cleanup();
-
-	for (int i = 0; i < N; i++)
-	{
-		out[i][REAL] /= N;
-		out[i][IMAG] /= N;
-	}
-}
-
-void displayComplex(fftw_complex* y)
-{
-	for (int i = 0; i < N; i++)
-	{
-		if (y[i][IMAG] < 0)
-		{
-			std::cout << y[i][REAL] << " - " << abs(y[i][IMAG]) << "i" << std::endl;
-		}else
-		{
-			std::cout << y[i][REAL] << " x " << abs(y[i][IMAG]) << "i" << std::endl;
-		}
-	}
-
-
-}
 
 
 int main()
@@ -121,6 +79,10 @@ int main()
 	/********************************************************
 					TEST AREA
 	********************************************************/
+
+	//PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	
+
 	Row test{};
 
 	WaveReader test1("soundfiles/susann_vega.wav");
@@ -130,6 +92,7 @@ int main()
 
 	glfwSetTime(0);
 	/**********		MAIN LOOP	  **********/	
+	PlaySound(TEXT("soundfiles/susann_vega.wav"), NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		

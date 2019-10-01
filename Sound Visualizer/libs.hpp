@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <Windows.h>
 
 #include <GL/glew.h>  
 #include <GLFW/glfw3.h>
