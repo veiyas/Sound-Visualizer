@@ -6,11 +6,18 @@ WaveReader::WaveReader(const char* _path)
 		SndfileHandle reader = SndfileHandle(_path);
 		sf_count_t wav_size = reader.frames();
 		
+		//Create feedback string with ugly C relics
+		std::string temp = "Reading data from "; temp += _path; temp += "...";
+		const char* feedback_output = temp.c_str();
+		std::cout << feedback_output;
+
 		//Read data into vector frames and samplerate into fs
 		frames.resize(wav_size);
 		reader.read(&frames[0], reader.frames());
 		fs = reader.samplerate();
+			std::cout << " done!\n";
 
+		std::cout << "Calculating frequency data...";
 		freq_data.resize(ceil(wav_size / BUFFER));
 		//FFT with buffer size 1000 samples
 		for (long long int i = 0; i < wav_size; i++)
@@ -47,5 +54,5 @@ WaveReader::WaveReader(const char* _path)
 			fftw_destroy_plan(fft_plan);
 			fftw_cleanup();
 		}
-		//std::cout << "Number of FFT samplings: " << frames.size() / BUFFER << "\n";
+		std::cout << " done!\n";
 }

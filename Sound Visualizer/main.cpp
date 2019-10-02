@@ -15,11 +15,9 @@ int main()
 	/********************************************************
 					TEST AREA
 	********************************************************/
-	std::cout << "Reading and calculating frequency data....";
 
 	Spectrum spec{ PATH };
 
-	std::cout << "done!\n";
 	/********************************************************
 	********************************************************/
 
@@ -53,8 +51,8 @@ int main()
 
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-45.f, -30.f, -55.f));
-	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(30.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-45.f, -30.f, -60.f));
+	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(25.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
 	Model_Matrix = glm::scale(Model_Matrix, glm::vec3(1.f));
@@ -90,7 +88,7 @@ int main()
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glClearColor(sin(current_time), sin(current_time), cos(current_time), 1.0f);
+		//glClearColor(sin(current_time), sin(current_time), cos(current_time), 1.0f);
 
 		spec.create_row();
 		spec.render();
@@ -99,7 +97,7 @@ int main()
 
 		glfwPollEvents();
 
-		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -0.015 * (1 / render_time))); //Move the rows
+		Model_Matrix = glm::translate(Model_Matrix, glm::vec3(0.f, 0.f, -1.f)); //Move the rows
 		glUniformMatrix4fv(location_M, 1, GL_FALSE, glm::value_ptr(Model_Matrix));
 		glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 		glUniformMatrix4fv(location_P, 1, GL_FALSE, glm::value_ptr(Projection_Matrix));
@@ -109,8 +107,9 @@ int main()
 		last_time = glfwGetTime();
 		render_time = last_time - current_time;
 
+		
 		//Pausa loopen i så lång tid det krävs till nästa row ska visas för att behålla synk (ms)
-		Sleep((ROWS_PER_SEC - render_time) * 1000);
+		Sleep(std::max((ROWS_PER_SEC - render_time) * 1000, 0.0));
 	}
 
 	glfwDestroyWindow(window);
@@ -150,6 +149,7 @@ void show_glfw_error(int error, const char* description)
 
 GLFWwindow* initialize_all_libraries(int height, int width)
 {
+	std::cout << "Initializing openGL...";
 	glfwSetErrorCallback(show_glfw_error);
 
 	if (!glfwInit()) {
@@ -191,11 +191,8 @@ GLFWwindow* initialize_all_libraries(int height, int width)
 
 	int nr_extensions = 0;
 	glGetIntegerv(GL_NUM_EXTENSIONS, &nr_extensions);
-
-	//for (int i = 0; i < nr_extensions; ++i) {
-	//	std::cout << glGetStringi(GL_EXTENSIONS, i) << '\n';
-	//}
-
+	
+	std::cout << " done!\n";
 	return window;
 }
 

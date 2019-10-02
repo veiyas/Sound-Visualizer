@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <algorithm>
 
 #include "FFTW/fftw3.h"
 
@@ -17,5 +18,5 @@ public:
 private:
 	std::vector<fftw_complex*> freqs;
 	std::vector<Row*> rows;
-	unsigned which_row = 0;
+	int which_row = 0;
 };

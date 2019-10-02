@@ -9,5 +9,7 @@ const unsigned NUM_BARS = 200;  //Number of bars in each row
 
 const GLfloat scale = 30.f;
 
-const unsigned BUFFER = 2048;
+const unsigned BUFFER = 4096;
 const unsigned SAMPLERATE = 48000;
+
+const int ROW_RENDER_LIMIT = 20;
