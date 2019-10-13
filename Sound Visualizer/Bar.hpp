@@ -7,6 +7,7 @@
 #include "Constants.hpp"
 
 #include <vector>
+#include <memory>
 
 class Bar
 {
@@ -23,6 +24,6 @@ private:
 	const int ntris;  // Number of triangles in the index array (may be zero)
 	GLuint vertexbuffer; // Buffer ID to bind to GL_ARRAY_BUFFER
 	GLuint indexbuffer;  // Buffer ID to bind to GL_ELEMENT_ARRAY_BUFFER
-	GLfloat* vertexarray; // Vertex array on interleaved format: x y z nx ny nz s t
-	GLuint* indexarray;   // Element index array
+	/*std::unique_ptr<GLfloat[]> vertexarray;*/ // Vertex array on interleaved format: x y z nx ny nz s t
+	/*std::unique_ptr<GLuint[]> indexarray;*/   // Element index array
 };

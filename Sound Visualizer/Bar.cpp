@@ -31,8 +31,8 @@ Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
 		4,7,6
 	};
 
-	vertexarray = new GLfloat[8 * nverts];
-	indexarray = new GLuint[3 * ntris];
+	std::unique_ptr<GLfloat[]> vertexarray( new GLfloat[8 * nverts] );
+	std::unique_ptr<GLuint[]> indexarray( new GLuint[3 * ntris] );
 
 	for (int i = 0; i < 8 * nverts; i++) {
 		vertexarray[i] = vertex_array_data[i];
@@ -53,7 +53,7 @@ Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	// Present our vertex coordinates to OpenGL
 	glBufferData(GL_ARRAY_BUFFER,
-		8 * nverts * sizeof(GLfloat), vertexarray, GL_STATIC_DRAW);
+		8 * nverts * sizeof(GLfloat), vertexarray.get(), GL_STATIC_DRAW);
 	// Specify how many attribute arrays we have in our VAO
 	glEnableVertexAttribArray(0); // Vertex coordinates
 	glEnableVertexAttribArray(1); // Normals
@@ -76,7 +76,7 @@ Bar::Bar(GLfloat x_coord, GLfloat height, GLfloat z_coord)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexbuffer);
 	// Present our vertex indices to OpenGL
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-		3 * ntris * sizeof(GLuint), indexarray, GL_STATIC_DRAW);
+		3 * ntris * sizeof(GLuint), indexarray.get(), GL_STATIC_DRAW);
 
 	// Deactivate (unbind) the VAO and the buffers again.
 	// Do NOT unbind the index buffer while the VAO is still bound.

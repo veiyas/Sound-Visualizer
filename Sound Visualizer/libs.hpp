@@ -6,6 +6,7 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
+#include <memory>
 #include <Windows.h>
 
 #include <GL/glew.h>  

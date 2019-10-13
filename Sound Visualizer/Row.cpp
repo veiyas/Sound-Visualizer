@@ -10,6 +10,7 @@ Row::Row(fftw_complex* data, int depth)
 			mag = 0.0;
 
 		bars.push_back(Bar(BAR_WIDTH * i, mag, BAR_LENGTH * depth));
+
 	}
 }
 
