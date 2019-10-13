@@ -5,6 +5,7 @@ Spectrum::Spectrum(const char* _path)
 	WaveReader temp{ _path };
 
 	freqs = temp.freq_data;
+	fs = temp.fs;
 }
 
 void Spectrum::create_row()
@@ -17,7 +18,7 @@ void Spectrum::create_row()
 
 		if (which_row > ROW_RENDER_LIMIT)
 		{
-			delete rows[which_row - ROW_RENDER_LIMIT];
+			delete rows[(__int64)which_row - (__int64)ROW_RENDER_LIMIT];
 		}
 	}
 	else

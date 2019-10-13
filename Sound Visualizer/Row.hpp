@@ -1,7 +1,6 @@
 #pragma once
 #include "Bar.hpp"
 #include "Constants.hpp"
-#include "WaveReader.hpp"
 #include "FFTW/fftw3.h"
 
 #include <vector>
@@ -18,7 +17,7 @@ public:
 	Row(fftw_complex* data, int depth);
 	Row(const Row&) = default;
 	Row& operator=(const Row&) = default;
-	~Row() = default;
+	~Row();
 
 	//Methods
 	void render();
@@ -26,5 +25,5 @@ public:
 	void create_row();
 
 private:
-	std::vector<Bar> bars;	
+	std::vector<Bar*> bars;	
 };

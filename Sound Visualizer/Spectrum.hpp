@@ -15,8 +15,11 @@ public:
 	void create_row();
 	void render();
 
+	int fs = 0;
+
 private:
 	std::vector<fftw_complex*> freqs;
 	std::vector<Row*> rows;
+	
 	int which_row = 0;
 };

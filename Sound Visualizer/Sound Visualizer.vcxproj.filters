@@ -55,9 +55,6 @@
     <ClInclude Include="Bar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Spectrum.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

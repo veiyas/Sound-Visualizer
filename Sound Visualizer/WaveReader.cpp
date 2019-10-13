@@ -7,8 +7,8 @@ WaveReader::WaveReader(const char* _path)
 		sf_count_t wav_size = reader.frames();
 		
 		//Create feedback string with ugly C relics
-		std::string temp = "Reading data from "; temp += _path; temp += "...";
-		const char* feedback_output = temp.c_str();
+		std::string temp_string = "Reading data from "; temp_string += _path; temp_string += "...";
+		const char* feedback_output = temp_string.c_str();
 		std::cout << feedback_output;
 
 		//Read data into vector frames and samplerate into fs
@@ -18,19 +18,19 @@ WaveReader::WaveReader(const char* _path)
 			std::cout << " done!\n";
 
 		std::cout << "Calculating frequency data...";
-		freq_data.resize(ceil(wav_size / BUFFER));
+		freq_data.resize((__int64)ceil(wav_size / BUFFER));
 		//FFT with buffer size 1000 samples
 		for (long long int i = 0; i < wav_size; i++)
 		{
 			//Because the next loop keeps accessing OOB for some reason, TODO lmao
 			bool end_of_frames = false;
 
-			//Läs in värden i temporär array
+			//Read buffer values into temp array
 			double *temp = new double[BUFFER]{ 0.0 };
 
 			for (long long int j = i*BUFFER; j < (i + 1) * BUFFER; j++)
 			{
-				if ((i + 1) * BUFFER >= frames.size())
+				if ((unsigned)((i + 1) * BUFFER) >= frames.size())
 				{
 					end_of_frames = true;
 					break;
@@ -54,5 +54,6 @@ WaveReader::WaveReader(const char* _path)
 			fftw_destroy_plan(fft_plan);
 			fftw_cleanup();
 		}
+
 		std::cout << " done!\n";
 }

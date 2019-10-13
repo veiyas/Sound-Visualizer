@@ -4,11 +4,9 @@ void window_resized(GLFWwindow* window, int width, int height);
 void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods);
 void show_glfw_error(int error, const char* description);
 GLFWwindow* initialize_all_libraries(int height, int width);
-
 bool load_shaders(GLuint& program);
 
-const double ROWS_PER_SEC = (double)BUFFER / (double)SAMPLERATE;
-const char *PATH = "soundfiles/susann_vega.wav";
+const char *PATH = "soundfiles/sweep.wav";
 
 int main()
 {
@@ -17,10 +15,11 @@ int main()
 	********************************************************/
 
 	Spectrum spec{ PATH };
+	std::cout << "Samplerate = " << spec.fs << "\n";
+	double ROWS_PER_SEC = (double)BUFFER / (double)spec.fs;
 
 	/********************************************************
 	********************************************************/
-
 
 	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
 	int frame_buffer_width = 0;
@@ -51,7 +50,7 @@ int main()
 
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-45.f, -30.f, -60.f));
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-100.f, -30.f, -120.f));
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(25.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
@@ -79,6 +78,8 @@ int main()
 	double last_time = 0.0;
 	double render_time = 1.0;
 	glfwSetTime(0);
+
+	std::cout << "Highest frequency represented: " << ((double)spec.fs / (double)BUFFER) * NUM_BARS << "\n";
 
 	/**********		MAIN LOOP	  **********/	
 	PlaySound(TEXT(PATH), NULL, SND_ASYNC);
@@ -109,7 +110,8 @@ int main()
 
 		
 		//Pausa loopen i så lång tid det krävs till nästa row ska visas för att behålla synk (ms)
-		Sleep(std::max((ROWS_PER_SEC - render_time) * 1000, 0.0));
+
+		Sleep((DWORD)std::max((ROWS_PER_SEC - render_time) * 1000, 0.0));
 	}
 
 	glfwDestroyWindow(window);
@@ -134,8 +136,6 @@ void key_pressed(GLFWwindow* window, int key, int scancode, int action, int mods
 void window_resized(GLFWwindow* window, int width, int height)
 {
 	std::cout << "Window resized, new window size: " << width << " x " << height << '\n';
-
-	glClearColor(0, 0, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(window);
 }
@@ -149,7 +149,7 @@ void show_glfw_error(int error, const char* description)
 
 GLFWwindow* initialize_all_libraries(int height, int width)
 {
-	std::cout << "Initializing openGL...";
+	std::cout << "Initializing openGL...\n";
 	glfwSetErrorCallback(show_glfw_error);
 
 	if (!glfwInit()) {
@@ -192,7 +192,7 @@ GLFWwindow* initialize_all_libraries(int height, int width)
 	int nr_extensions = 0;
 	glGetIntegerv(GL_NUM_EXTENSIONS, &nr_extensions);
 	
-	std::cout << " done!\n";
+	std::cout << "done!\n";
 	return window;
 }
 
@@ -207,7 +207,7 @@ bool load_shaders(GLuint& program)
 
 	std::ifstream in_file;
 
-	////Vertex
+	//Vertex
 	in_file.open("vertex_shader.glsl");
 
 	if (in_file.is_open())

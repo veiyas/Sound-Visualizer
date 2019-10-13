@@ -9,16 +9,23 @@ Row::Row(fftw_complex* data, int depth)
 		if(mag < 1e-3)
 			mag = 0.0;
 
-		bars.push_back(Bar(BAR_WIDTH * i, mag, BAR_LENGTH * depth));
-
+		bars.push_back(new Bar(BAR_WIDTH * i, (GLfloat)(20 * log10(mag)), BAR_LENGTH * depth));
 	}
+}
+
+Row::~Row()
+{	
+	for (size_t i = 0; i < bars.size(); i++)
+	{
+		delete bars[i];
+	}	
 }
 
 void Row::render()
 {
 	for (size_t i = 0; i < bars.size(); i++)
 	{
-		bars[i].render();
+		bars[i]->render();
 	}
 }
 
