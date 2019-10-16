@@ -6,7 +6,7 @@ void show_glfw_error(int error, const char* description);
 GLFWwindow* initialize_all_libraries(int height, int width);
 bool load_shaders(GLuint& program);
 
-const char *PATH = "soundfiles/sweep.wav";
+const char *PATH = "soundfiles/martyr_mono.wav";
 
 int main()
 {
@@ -21,7 +21,7 @@ int main()
 	/********************************************************
 	********************************************************/
 
-	auto window = initialize_all_libraries(1920 / 2, 1080 / 2);
+	auto window = initialize_all_libraries(1920/2, 1080/2);
 	int frame_buffer_width = 0;
 	int frame_buffer_height = 0;
 	glfwGetFramebufferSize(window, &frame_buffer_width, &frame_buffer_height);
@@ -50,7 +50,7 @@ int main()
 
 	//Model translation, rotation and scale
 	glm::mat4 Model_Matrix(1.f);
-	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-100.f, -30.f, -120.f));
+	Model_Matrix = glm::translate(Model_Matrix, glm::vec3(-120.f, -30.f, -180.f));
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(25.f), glm::vec3(1.f, 0.f, 0.f)); //X-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 1.f, 0.f)); //Y-axis
 	Model_Matrix = glm::rotate(Model_Matrix, glm::radians(0.f), glm::vec3(0.f, 0.f, 1.f));	//Z-axis
@@ -72,6 +72,8 @@ int main()
 	glUseProgram(core_program);
 	glUniformMatrix4fv(location_V, 1, GL_FALSE, glm::value_ptr(View_Matrix));
 	glUniform1f(location_scale, scale);
+
+	glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 	
 	
 	double current_time = 0.0;
@@ -82,14 +84,12 @@ int main()
 	std::cout << "Highest frequency represented: " << ((double)spec.fs / (double)BUFFER) * NUM_BARS << "\n";
 
 	/**********		MAIN LOOP	  **********/	
-	PlaySound(TEXT(PATH), NULL, SND_ASYNC);
+	PlaySound(TEXT("soundfiles/martyr_stereo"), NULL, SND_ASYNC);
 	while (!glfwWindowShouldClose(window))
 	{
 		current_time = glfwGetTime();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		//glClearColor(sin(current_time), sin(current_time), cos(current_time), 1.0f);
 
 		spec.create_row();
 		spec.render();
@@ -108,10 +108,15 @@ int main()
 		last_time = glfwGetTime();
 		render_time = last_time - current_time;
 
+		double time_left = ROWS_PER_SEC - render_time;
+		
+
+		if (time_left < 0)
+			std::cout << time_left << "\n";
 		
 		//Pausa loopen i så lång tid det krävs till nästa row ska visas för att behålla synk (ms)
 
-		Sleep((DWORD)std::max((ROWS_PER_SEC - render_time) * 1000, 0.0));
+		Sleep((DWORD)std::max((time_left) * 1000, 0.0));
 	}
 
 	glfwDestroyWindow(window);

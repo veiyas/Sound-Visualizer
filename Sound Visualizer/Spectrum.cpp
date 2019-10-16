@@ -1,8 +1,8 @@
 #include "Spectrum.hpp"
 
-Spectrum::Spectrum(const char* _path)
+Spectrum::Spectrum(const char* path)
 {
-	WaveReader temp{ _path };
+	WaveReader temp{ path };
 
 	freqs = temp.freq_data;
 	fs = temp.fs;

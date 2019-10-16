@@ -1,7 +1,13 @@
-﻿  main.cpp
-C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
-C:\Users\David\source\repos\Sound-Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(595): message :  see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(172): message :  see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.21.27702\include\chrono(574): message :  see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
-  Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound-Visualizer\x64\Debug\Sound Visualizer.exe
+﻿  Bar.cpp
+  Row.cpp
+  main.cpp
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(45,1): warning C4201:  nonstandard extension used: nameless struct/union
+  Spectrum.cpp
+  WaveReader.cpp
+  WaveReader.hpp
+C:\Users\David\source\repos\Sound Visualizer\Sound Visualizer\include\glm\detail\type_quat.hpp(125): message :  see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+x64\Debug\WaveReader.obj : warning LNK4042: object specified more than once; extras ignored
+  Generating code
+  Finished generating code
+  Sound Visualizer.vcxproj -> C:\Users\David\source\repos\Sound Visualizer\x64\Debug\Sound Visualizer.exe

@@ -2,15 +2,16 @@
 #include <vector>
 #include <algorithm>
 
-#include "FFTW/fftw3.h"
-
 #include "WaveReader.hpp"
 #include "Row.hpp"
+
+
+constexpr int ROW_RENDER_LIMIT = 10;
 
 class Spectrum
 {
 public:
-	Spectrum(const char* _path);
+	Spectrum(const char* path);
 
 	void create_row();
 	void render();
